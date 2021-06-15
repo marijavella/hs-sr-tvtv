@@ -2,7 +2,7 @@
 
 Python 3.x code to reproduce the experiments in
 
-[Enhanced Hyperspectral Image Super-Resolution via RGB Fusion and TV-TV Minimization](https://arxiv.org/abs/2011.14387)
+[Enhanced Hyperspectral Image Super-Resolution via RGB Fusion and TV-TV Minimization](https://arxiv.org/abs/2106.07066)
 
 Marija Vella, Bowen Zhang, Wei Chen, João F. C. Mota<br/>
 Accepted to ICIP 2021
