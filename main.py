@@ -3,6 +3,17 @@ import argparse
 import scipy.io as sio
 from utils import*
 
+all_psnr_solver = []
+all_ssim_solver = []
+all_sam_solver = []
+all_rmse_solver = []
+all_ergas_solver = []
+
+all_psnr_net = []
+all_ssim_net = []
+all_sam_net = []
+all_rmse_net = []
+all_ergas_net = []
 
 parser = argparse.ArgumentParser()
 
@@ -64,7 +75,20 @@ for root, dirs, files in os.walk('./data/X'):
         W = np.squeeze(W).reshape((M, N, nbands), order='F')
 
         # Compute quality metrics
-        evaluate_metrics(inX, x_solver, W, args.outputs_dir, args.scaling_factor)
+        av_psnr_tvtv, av_ssim_tvtv, av_sam_tvtv, av_rmse_tvtv, av_ergas_tvtv, av_psnr_net, av_ssim_net, av_sam_net, \
+        av_rmse_net, av_ergas_net = evaluate_metrics(inX, x_solver, W, args.scaling_factor)
+
+        all_psnr_solver.append(av_psnr_tvtv)
+        all_ssim_solver.append(av_ssim_tvtv)
+        all_sam_solver.append(av_sam_tvtv)
+        all_rmse_solver.append(av_rmse_tvtv)
+        all_ergas_solver.append(av_ergas_tvtv)
+
+        all_psnr_net.append(av_psnr_net)
+        all_ssim_net.append(av_ssim_net)
+        all_sam_net.append(av_sam_net)
+        all_rmse_net.append(av_rmse_net)
+        all_ergas_net.append(av_ergas_net)
 
         band = 15  # band to plot
         plot_results(inX, x_solver, W, band)
@@ -72,18 +96,32 @@ for root, dirs, files in os.walk('./data/X'):
     # Print results
     print('********* Mean PSNR, SSIM, SAM, ERGAS and RMSE Results **********')
 
-    print('****************** TV-TV *******************')
+    if not os.path.exists(args.outputs_dir):
+        os.makedirs(args.outputs_dir)
 
-    print('psnr_tv = ', np.load('Results/mean_psnr_solver.npy')[0], 'dB')
-    print('ssim_tv = ', np.load('Results/mean_ssim_solver.npy')[0])
-    print('sam_tv = ', np.load('Results/mean_sam_solver.npy')[0])
-    print('rmse_tv = ', np.load('Results/mean_rmse_solver.npy')[0])
-    print('ergas_tv = ', np.load('Results/mean_ergas_solver.npy')[0])
+    np.save(os.path.join(args.outputs_dir, 'mean_psnr_solver.npy'), all_psnr_solver)
+    np.save(os.path.join(args.outputs_dir, 'mean_ssim_solver.npy'), all_ssim_solver)
+    np.save(os.path.join(args.outputs_dir, 'mean_sam_solver.npy'), all_sam_solver)
+    np.save(os.path.join(args.outputs_dir, 'mean_rmse_solver.npy'), all_rmse_solver)
+    np.save(os.path.join(args.outputs_dir, 'mean_ergas_solver.npy'), all_ergas_solver)
+
+    np.save(os.path.join(args.outputs_dir, 'mean_psnr_cnn.npy'), all_psnr_net)
+    np.save(os.path.join(args.outputs_dir, 'mean_ssim_cnn.npy'), all_ssim_net)
+    np.save(os.path.join(args.outputs_dir, 'mean_sam_cnn.npy'), all_sam_net)
+    np.save(os.path.join(args.outputs_dir, 'mean_rmse_cnn.npy'), all_rmse_net)
+    np.save(os.path.join(args.outputs_dir, 'mean_ergas_cnn.npy'), all_ergas_net)
+
+    print('****************** TV-TV *******************')
+    print('psnr_tv = ', np.mean(all_psnr_solver), 'dB')
+    print('ssim_tv = ', np.mean(all_ssim_solver))
+    print('sam_tv = ', np.mean(all_sam_solver))
+    print('rmse_tv = ', np.mean(all_rmse_solver))
+    print('ergas_tv = ', np.mean(all_ergas_solver))
 
     print('****************** Network *******************')
+    print('psnr_network = ', np.mean(all_psnr_net), 'dB')
+    print('ssim_network = ', np.mean(all_ssim_net))
+    print('sam_network = ', np.mean(all_sam_net))
+    print('rmse_network = ', np.mean(all_rmse_net))
+    print('ergas_network = ', np.mean(all_ergas_net))
 
-    print('psnr_network = ', np.load('Results/mean_psnr_cnn.npy')[0], 'dB')
-    print('ssim_network = ', np.load('Results/mean_ssim_cnn.npy')[0])
-    print('sam_network = ', np.load('Results/mean_sam_cnn.npy')[0])
-    print('rmse_network = ', np.load('Results/mean_rmse_cnn.npy')[0])
-    print('ergas_network = ', np.load('Results/mean_ergas_cnn.npy')[0])

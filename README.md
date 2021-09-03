@@ -83,7 +83,7 @@ The main scripts are:
 ## Citation ##
 
 ```
-Vella, M. Zhang, B., Chen, W. & Mota, J. F. C. Enhanced Hyperspectral Image Super-Resolution via RGB Fusion and TV-TV Minimization. ArXiv 
+Vella, M. Zhang, B., Chen, W. & Mota, J. F. C. Enhanced Hyperspectral Image Super-Resolution via RGB Fusion and TV-TV Minimization, ICIP 2021.
 ```
 
 ### Contact ###

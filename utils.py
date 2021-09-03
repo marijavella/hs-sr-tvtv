@@ -185,19 +185,7 @@ def img_2d_mat(x_true, x_pred):
     return x_mat, y_mat
 
 
-def evaluate_metrics(inX, x_solver, W, outputs_dir, sf):
-
-    all_psnr_solver = []
-    all_ssim_solver = []
-    all_sam_solver = []
-    all_rmse_solver = []
-    all_ergas_solver = []
-
-    all_psnr_net = []
-    all_ssim_net = []
-    all_sam_net = []
-    all_rmse_net = []
-    all_ergas_net = []
+def evaluate_metrics(inX, x_solver, W, sf):
 
     av_psnr_tvtv = compare_mpsnr(inX, x_solver)
     av_ssim_tvtv = compare_mssim(inX, x_solver, multichannel=True)
@@ -211,33 +199,7 @@ def evaluate_metrics(inX, x_solver, W, outputs_dir, sf):
     av_rmse_net = find_rmse(inX, W)
     av_ergas_net = compare_ergas(inX, W, sf)
 
-    all_psnr_solver.append(av_psnr_tvtv)
-    all_ssim_solver.append(av_ssim_tvtv)
-    all_sam_solver.append(av_sam_tvtv)
-    all_rmse_solver.append(av_rmse_tvtv)
-    all_ergas_solver.append(av_ergas_tvtv)
-
-    all_psnr_net.append(av_psnr_net)
-    all_ssim_net.append(av_ssim_net)
-    all_sam_net.append(av_sam_net)
-    all_rmse_net.append(av_rmse_net)
-    all_ergas_net.append(av_ergas_net)
-
-    if not os.path.exists(outputs_dir):
-        os.makedirs(outputs_dir)
-
-    np.save(os.path.join(outputs_dir, 'mean_psnr_solver.npy'), all_psnr_solver)
-    np.save(os.path.join(outputs_dir, 'mean_ssim_solver.npy'), all_ssim_solver)
-    np.save(os.path.join(outputs_dir, 'mean_sam_solver.npy'), all_sam_solver)
-    np.save(os.path.join(outputs_dir, 'mean_rmse_solver.npy'), all_rmse_solver)
-    np.save(os.path.join(outputs_dir, 'mean_ergas_solver.npy'), all_ergas_solver)
-
-    np.save(os.path.join(outputs_dir, 'mean_psnr_cnn.npy'), all_psnr_net)
-    np.save(os.path.join(outputs_dir, 'mean_ssim_cnn.npy'), all_ssim_net)
-    np.save(os.path.join(outputs_dir, 'mean_sam_cnn.npy'), all_sam_net)
-    np.save(os.path.join(outputs_dir, 'mean_rmse_cnn.npy'), all_rmse_net)
-    np.save(os.path.join(outputs_dir, 'mean_ergas_cnn.npy'), all_ergas_net)
-
+    return av_psnr_tvtv, av_ssim_tvtv, av_sam_tvtv, av_rmse_tvtv, av_ergas_tvtv, av_psnr_net, av_ssim_net, av_sam_net, av_rmse_net, av_ergas_net
 
 def plot_results(inX, x_solver, W, band):
 
