@@ -1,3 +1,5 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/enhanced-hyperspectral-image-super-resolution/hyperspectral-image-super-resolution-on)](https://paperswithcode.com/sota/hyperspectral-image-super-resolution-on?p=enhanced-hyperspectral-image-super-resolution)
+
 ## Enhanced Hyperspectral Image Super-Resolution via RGB Fusion and TV-TV Minimization ##
 
 Python 3.x code to reproduce the experiments in
