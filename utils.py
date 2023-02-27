@@ -13,19 +13,19 @@ def get_W():
     if not os.path.exists('./data/W'):
         os.makedirs('./data/W')
 
-    url = 'https://drive.google.com/u/0/uc?id=1bf6kWyAgf1JSTy25xwoR9qDLWG-UQtu7&export=download'
+    url = 'https://drive.google.com/file/d/11F94ANV5QWQQMp9NZ58Izg-UKQpT-Wm1/view?usp=sharing'
     output = 'balloons_ms'
-    gdown.download(url, output, quiet=False)
+    gdown.download(url, output, quiet=False, fuzzy=True)
     shutil.move('balloons_ms', './data/W/balloons_ms')
 
-    url = 'https://drive.google.com/u/0/uc?id=1Jfr16RWW7BiukLiyzqOEqO8A9TCLujjG&export=download'
+    url = 'https://drive.google.com/file/d/1FNXNRx4DSuod_hJKxQWEim0YC13PV59x/view?usp=sharing'
     output = 'clay_ms'
-    gdown.download(url, output, quiet=False)
+    gdown.download(url, output, quiet=False, fuzzy=True)
     shutil.move('clay_ms', './data/W/clay_ms')
 
-    url = 'https://drive.google.com/u/0/uc?id=15vTwIRimGoUxaE9JBGhHCTvI6EglRoYq&export=download'
+    url = 'https://drive.google.com/file/d/14G51qRHjwyiprvivDWf5PNefjBdqOxuH/view?usp=sharing'
     output = 'flowers_ms'
-    gdown.download(url, output, quiet=False)
+    gdown.download(url, output, quiet=False, fuzzy=True)
     shutil.move('flowers_ms', './data/W/flowers_ms')
 
 
